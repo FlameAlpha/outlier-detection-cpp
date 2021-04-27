@@ -4,14 +4,10 @@
 
 int main() {
     svm_cxx one_class_svm(2);
-    dataframe<double> train_set(2);
-    dataframe<double> test_set_true(2);
-    dataframe<double> test_set_false(2);
 
-    std::random_device rd;
+    std::random_device source;
 
     std::vector<unsigned long int> random_data(42);
-    std::random_device source;
     std::generate(random_data.begin(), random_data.end(), std::ref(source));
     std::seed_seq seeds(random_data.begin(), random_data.end());
 
@@ -19,6 +15,10 @@ int main() {
 
     std::uniform_real_distribution<double> uniform_dist(-8, 8);
     std::normal_distribution<double> normal_dist{0,1};
+
+    dataframe<double> train_set(2);
+    dataframe<double> test_set_true(2);
+    dataframe<double> test_set_false(2);
 
     for (int i = 0; i < 100; ++i) {
         train_set.append({0.3 * normal_dist(gen)+2,0.3 * normal_dist(gen)+2});
